@@ -11,7 +11,7 @@ Crea un nuevo proyecto de Node
 const winston = require('winston');
 
 const logger = winston.createLogger({
-  level: 'info',
+  level: 'error',
   format: winston.format.json(),
   defaultMeta: { service: 'user-service' },
   transports: [
@@ -20,7 +20,8 @@ const logger = winston.createLogger({
     // - Write all logs with importance level of `info` or less to `combined.log`
     //
     new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
+    new winston.transports.File({ filename: 'error.log', level: 'info' }),
+   // new winston.transports.File({ filename: 'combined.log' }),
   ],
 });
 
@@ -33,12 +34,12 @@ function errorPersonalizado() {
 }
 console.log("asd")
 try {
-   let a = 2 +"b";
-   console.log(na)
+  errorPersonalizado();
 }catch(e){ 
     console.log("hola error")
-    logger.error("solo se pueden sumar numeros!")
-    logger.info("info solo se pueden sumar numeros!")
+    logger.error("solo se pueden sumar numeros!", e.toString())
+    logger.info("solo se pueden sumar numeros!", e.toString())
+    
   
 }
 
